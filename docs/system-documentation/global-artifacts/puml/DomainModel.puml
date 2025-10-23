@@ -1,0 +1,137 @@
+@startuml
+' --- Configuration (English) ---
+left to right direction
+skinparam linetype ortho
+
+skinparam class {
+    BackgroundColor LightBlue
+    BorderColor Black
+    ArrowColor Black
+}
+skinparam ArrowColor Black
+hide empty members
+hide circle
+title Conceptual Domain Model (US06)
+
+' ------------------------------------------------------------------
+' --- Classes (Grouping via explicit positioning) ---
+' ------------------------------------------------------------------
+
+' --- Core Entities (Left Side) ---
+class SNSUser {
+    name
+    dateOfBirth
+    sex
+    postalAddress
+    phoneNumber
+    email
+    citizenCardNumber
+    snsUserNumber
+}
+
+class Appointment {
+    date
+    time
+}
+
+class VaccinationEvent {
+    lotNumber
+}
+
+class VaccinationCertificate {
+}
+
+
+' --- Personnel and Roles (Central/Top) ---
+abstract class Personnel {
+    idPersonnel
+    name
+    postalAddress
+    phoneNumber
+    email
+}
+
+class Receptionist {
+}
+
+class Nurse {
+}
+
+class DGSAdministrator {
+}
+
+Personnel <|-- Receptionist
+Personnel <|-- Nurse
+
+
+' --- Vaccines and Data (Bottom) ---
+class VaccineType {
+    code
+    disease
+    shortDescription
+}
+
+class Vaccine {
+    commercialName
+    brand
+    technologyUsed
+}
+
+
+' --- Vaccination Centers (Right Side) ---
+abstract class VaccinationCenter {
+    name
+    postalAddress
+    phoneNumber
+    email
+    website
+    openingHours
+    closingHours
+    maxVaccinesPerHour
+}
+
+class HealthcareCenter {
+}
+
+class MassVaccinationCenter {
+    isTemporary : Boolean = true
+}
+
+VaccinationCenter <|-- HealthcareCenter
+VaccinationCenter <|-- MassVaccinationCenter
+
+
+' ------------------------------------------------------------------
+' --- RELATIONSHIPS (RELACÕES E DIRECIONALIDADE) ---
+' ------------------------------------------------------------------
+
+' --- Core Flow (User -> Appointment -> Event) ---
+SNSUser "1" -- "0..*" Appointment : makes
+Appointment "1" .. "0..1" VaccinationEvent : results in (fulfillment)
+VaccinationEvent "*" -right- "1" SNSUser : belongs to
+
+
+' --- Centers and Logistics ---
+Appointment "*" -right-> "1" VaccinationCenter : occurs at
+Personnel "*" -right-> "*" VaccinationCenter : \n works at (M:N)
+Receptionist "1" -down-> "0..*" Appointment : assists in scheduling
+
+
+' --- Vaccines ---
+Vaccine "1..*" -right-> "1" VaccineType : \nis a type of
+Appointment "*" -down-> "1" VaccineType : is for
+VaccinationEvent "*" -down-> "1" Vaccine : utilizes (brand)
+
+
+' --- Documents and Nurse Actions ---
+SNSUser "1" -right-> "0..*" VaccinationCertificate : obtains
+Nurse "1" -down-> "0..*" VaccinationEvent : registers
+Nurse "1" -right-> "0..*" VaccinationCertificate : issues
+
+
+' --- Administration and Management ---
+DGSAdministrator "1" -down-> "0..*" VaccinationCenter : manages
+DGSAdministrator "1" -down-> "0..*" Personnel : manages
+DGSAdministrator "1" -down-> "0..*" Vaccine : configures
+DGSAdministrator "1" -up-> "0..*" VaccineType : configures
+@enduml
