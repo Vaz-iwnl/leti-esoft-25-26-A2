@@ -1,7 +1,6 @@
 @startuml
 ' --- Configuration (English) ---
 left to right direction
-skinparam linetype ortho
 
 skinparam class {
     BackgroundColor LightBlue
@@ -11,7 +10,7 @@ skinparam class {
 skinparam ArrowColor Black
 hide empty members
 hide circle
-title Conceptual Domain Model (US06)
+title Conceptual Domain Model
 
 ' ------------------------------------------------------------------
 ' --- Classes (Grouping via explicit positioning) ---
@@ -108,23 +107,23 @@ VaccinationCenter <|-- MassVaccinationCenter
 ' --- Core Flow (User -> Appointment -> Event) ---
 SNSUser "1" -- "0..*" Appointment : makes
 Appointment "1" .. "0..1" VaccinationEvent : results in (fulfillment)
-VaccinationEvent "*" -right- "1" SNSUser : belongs to
+VaccinationEvent "*" -- "1" SNSUser :belongs to
 
 
 ' --- Centers and Logistics ---
-Appointment "*" -right-> "1" VaccinationCenter : occurs at
-Personnel "*" -right-> "*" VaccinationCenter : \n works at (M:N)
+Appointment "*" --> "1" VaccinationCenter : occurs at
+Personnel "*" -right-> "*" VaccinationCenter :  works at (M:N)
 Receptionist "1" -down-> "0..*" Appointment : assists in scheduling
 
 
 ' --- Vaccines ---
-Vaccine "1..*" -right-> "1" VaccineType : \nis a type of
-Appointment "*" -down-> "1" VaccineType : is for
-VaccinationEvent "*" -down-> "1" Vaccine : utilizes (brand)
+Vaccine "1..*" --> "1" VaccineType : is a type of
+Appointment "*" --> "1" VaccineType : is for
+VaccinationEvent "*" --> "1" Vaccine : utilizes (brand)
 
 
 ' --- Documents and Nurse Actions ---
-SNSUser "1" -right-> "0..*" VaccinationCertificate : obtains
+SNSUser "1" --> "0..*" VaccinationCertificate : obtains
 Nurse "1" -down-> "0..*" VaccinationEvent : registers
 Nurse "1" -right-> "0..*" VaccinationCertificate : issues
 
