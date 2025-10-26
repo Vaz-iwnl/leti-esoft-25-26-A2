@@ -1,6 +1,6 @@
 @startuml
 'https://plantuml.com/use-case-diagram
-title Use Case Diagram - PVMS (Sprint 2)
+title Use Case Diagram - PVMS (Sprint 1)
 left to right direction
 
 ' === ACTORS ===
