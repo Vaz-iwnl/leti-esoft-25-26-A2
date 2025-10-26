@@ -40,9 +40,9 @@ User --> UC03
 ' Receptionist
 Rec --> UC04
 Rec --> UC05
-Rec --> UC06
 
 ' Nurse
+Nurse --> UC06
 Nurse --> UC07
 Nurse --> UC08
 Nurse --> UC09
@@ -57,9 +57,9 @@ Admin --> UC13
 System --> UC14
 
 ' === INCLUDES / EXTENDS ===
-UC02 ..> UC05 : <<include>> "Verify Capacity"
+' <<include>> removida - A verificação de capacidade é interna ao UC02
 UC08 ..> UC09 : <<extend>> "If reaction observed"
-UC08 ..> UC06 : <<extend>> "Generate certificate"
+' <<extend>> removida - UC06 é um UC independente iniciado pela Enfermeira "a pedido"
 
 ' === NOTES ===
 note top of User
