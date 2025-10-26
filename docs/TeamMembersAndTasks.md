@@ -4,12 +4,12 @@
 
 The team consists of the students listed in the table below. 
 
-| Student Number	 | Name |
-|-----------------|----------------------------|
-| **1XXXXXX**     | Name of student 1          |
-| **1XXXXXX**     | Name of student 2          |
-| **1XXXXXX**     | Name of student 3          |
-| **1XXXXXX**     | Name of student 4          |
+| Student Number	  | Name            |
+|------------------|-----------------|
+| **1240624**      | José Alves      |
+| **1240908**      | João Vaz        |
+| **1241013**      | Afonso Sobreiro |
+| **1240690**      | Martim Alves    |
 
 
 # 2. Task Distribution ###

@@ -40,6 +40,12 @@ class VaccinationEvent {
 class VaccinationCertificate {
 }
 
+' *** CLASSE ADICIONADA ***
+class AdverseReaction {
+    description
+    recordedAt
+}
+
 
 ' --- Personnel and Roles (Central/Top) ---
 abstract class Personnel {
@@ -126,6 +132,10 @@ VaccinationEvent "*" --> "1" Vaccine : utilizes (brand)
 SNSUser "1" --> "0..*" VaccinationCertificate : obtains
 Nurse "1" -down-> "0..*" VaccinationEvent : registers
 Nurse "1" -right-> "0..*" VaccinationCertificate : issues
+
+' *** RELAÇÕES ADICIONADAS ***
+Nurse "1" --> "0..*" AdverseReaction : records
+AdverseReaction "0..*" -- "1" VaccinationEvent : related to
 
 
 ' --- Administration and Management ---
