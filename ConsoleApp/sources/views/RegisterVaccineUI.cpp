@@ -22,7 +22,6 @@ public:
     void run() {
         std::string name, brand;
 
-        // Limpar o buffer de entrada (caso venha de outro menu)
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
         std::cout << "=======================================" << std::endl;

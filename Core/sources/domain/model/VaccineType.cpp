@@ -10,14 +10,12 @@ namespace domain::model {
                              VaccineTechnology technology)
         : code_(code), disease_(disease), description_(description), technology_(technology)
     {
-        // Aqui você pode adicionar lógica de validação básica, como verificar se as strings não estão vazias
+
         if (code_.empty() || disease_.empty() || description_.empty()) {
             throw std::invalid_argument("Code, Disease, and Description cannot be empty.");
         }
-        // Nota: A validação do formato do código e a unicidade devem ser tratadas em um nível superior.
     }
 
-    // Implementações dos Getters
     std::string VaccineType::getCode() const {
         return code_;
     }
