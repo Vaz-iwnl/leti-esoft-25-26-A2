@@ -1,6 +1,6 @@
 #include <locale>
 #include <algorithm>
-#include "headers/domain/shared/StringUtils.h"
+#include "domain/shared/StringUtils.h"
 
 wstring StringUtils::toUpperCase(const wstring &value) {
     //  Assuming your system is already in UTF-8

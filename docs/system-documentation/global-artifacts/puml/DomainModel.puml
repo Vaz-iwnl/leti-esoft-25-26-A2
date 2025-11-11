@@ -112,35 +112,35 @@ VaccinationCenter <|-- MassVaccinationCenter
 
 ' --- Core Flow (User -> Appointment -> Event) ---
 SNSUser "1" -- "0..*" Appointment : makes
-Appointment "1" .. "0..1" VaccinationEvent : results in (fulfillment)
+Appointment "1" -- "0..1" VaccinationEvent : results in (fulfillment)
 VaccinationEvent "*" -- "1" SNSUser :belongs to
 
 
 ' --- Centers and Logistics ---
-Appointment "*" --> "1" VaccinationCenter : occurs at
-Personnel "*" -right-> "*" VaccinationCenter :  works at (M:N)
-Receptionist "1" -down-> "0..*" Appointment : assists in scheduling
+Appointment "*" -- "1" VaccinationCenter :> occurs at
+Personnel "*" -right- "*" VaccinationCenter : > works at (M:N)
+Receptionist "1" -down- "0..*" Appointment : > assists in scheduling
 
 
 ' --- Vaccines ---
-Vaccine "1..*" --> "1" VaccineType : is a type of
-Appointment "*" --> "1" VaccineType : is for
-VaccinationEvent "*" --> "1" Vaccine : utilizes (brand)
+Vaccine "1..*" -- "1" VaccineType : > is a type of
+Appointment "*" -- "1" VaccineType : > is for
+VaccinationEvent "*" -- "1" Vaccine : > utilizes (brand)
 
 
 ' --- Documents and Nurse Actions ---
-SNSUser "1" --> "0..*" VaccinationCertificate : obtains
-Nurse "1" -down-> "0..*" VaccinationEvent : registers
-Nurse "1" -right-> "0..*" VaccinationCertificate : issues
+SNSUser "1" -- "0..*" VaccinationCertificate :> obtains
+Nurse "1" -down- "0..*" VaccinationEvent :> registers
+Nurse "1" -right- "0..*" VaccinationCertificate : > issues
 
 ' *** RELAÇÕES ADICIONADAS ***
-Nurse "1" --> "0..*" AdverseReaction : records
-AdverseReaction "0..*" -- "1" VaccinationEvent : related to
+Nurse "1" -- "0..*" AdverseReaction : > records
+AdverseReaction "0..*" -- "1" VaccinationEvent : > related to
 
 
 ' --- Administration and Management ---
-DGSAdministrator "1" -down-> "0..*" VaccinationCenter : manages
-DGSAdministrator "1" -down-> "0..*" Personnel : manages
-DGSAdministrator "1" -down-> "0..*" Vaccine : configures
-DGSAdministrator "1" -up-> "0..*" VaccineType : configures
+DGSAdministrator "1" --"0..*" VaccinationCenter : > manages
+DGSAdministrator "1" -- "0..*" Personnel : > manages
+DGSAdministrator "1" -- "0..*" Vaccine : > configures
+DGSAdministrator "1" -up- "0..*" VaccineType : > configures
 @enduml
