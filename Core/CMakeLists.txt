@@ -26,6 +26,10 @@ add_library(Core
         # Shared (se existirem)
         sources/domain/shared/Result.cpp
         sources/domain/shared/StringUtils.cpp
+        headers/domain/model/VaccineTechnology.h
+        headers/domain/model/Vaccine.h
+        headers/domain/repositories/VaccineTechnologyRepository.h
+        ../ConsoleApp/sources/views/RegisterVaccineUI.cpp
 )
 
 # Torna os headers públicos

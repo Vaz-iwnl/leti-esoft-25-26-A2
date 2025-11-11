@@ -79,7 +79,7 @@ class VaccineType {
 class Vaccine {
     commercialName
     brand
-    technologyUsed
+    VaccineTechnology
 }
 
 
