@@ -21,4 +21,3 @@ public:
 };
 
 #endif // VACCINE_TECHNOLOGY_H
-};
