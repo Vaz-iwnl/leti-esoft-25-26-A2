@@ -1,7 +1,7 @@
 #include <iostream>
 #include <memory>
 #include "ConsoleApp/headers/views/SpecifyVaccineTypeView.h"
-#include "Core/headers/domain/model/VaccineTypeInMemoryContainer.h"
+#include "Core/headers/domain/container/VaccineTypeInMemoryContainer.h"
 #include "Core/headers/domain/model/VaccineTypeService.h"
 #include "Core/headers/controllers/ui/SpecifyVaccineTypeController.h"
 

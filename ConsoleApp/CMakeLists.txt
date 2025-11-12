@@ -1,9 +1,10 @@
 project(ConsoleApp)
 
 add_executable(ConsoleApp
-        ConsoleApp.cpp
+        ../main.cpp
         headers/views/SpecifyVaccineTypeView.h
         sources/views/SpecifyVaccineTypeView.cpp
+        sources/views/RegisterVaccineUI.cpp
 )
 
 target_include_directories(ConsoleApp PUBLIC
@@ -11,5 +12,4 @@ target_include_directories(ConsoleApp PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}/headers
 )
 
-# Link com a biblioteca Core
 target_link_libraries(ConsoleApp PRIVATE Core)

@@ -1,36 +1,67 @@
+#include "headers/views/SpecifyVaccineTypeView.h"
+
 #include <iostream>
-#include <memory>
-#include "../../headers/views/SpecifyVaccineTypeView.h"
-#include "../../../Core/headers/domain/model/VaccineTypeInMemoryContainer.h"
-#include "../../../Core/headers/domain/model/VaccineTypeService.h"
-#include "../../../Core/headers/controllers/ui/SpecifyVaccineTypeController.h"
+#include <string>
+#include <limits>
+#include <stdexcept>
 
-int main() {
-    std::cout << "==================================================" << std::endl;
-    std::cout << "  Sistema de Gestão de Vacinação Pandémica (PVMS)" << std::endl;
-    std::cout << "  DGS - Direção Geral de Saúde" << std::endl;
-    std::cout << "==================================================" << std::endl;
+namespace ui {
 
-    try {
-        // 1. Instancia o Container (Repositório em Memória)
-        auto container = std::make_unique<domain::container::VaccineTypeInMemoryContainer>();
+    void showSpecifyVaccineTypeView(const Core::Controller::SpecifyVaccineTypeController& controller) {
 
-        // 2. Instancia o Service, injetando o Container
-        auto service = std::make_unique<application::VaccineTypeService>(std::move(container));
+        std::cout << "\n=============================================" << std::endl;
+        std::cout << "   Especificar Novo Tipo de Vacina" << std::endl;
+        std::cout << "=============================================\n" << std::endl;
 
-        // 3. Instancia o Controller, injetando o Service
-        Core::Controller::SpecifyVaccineTypeController controller(*service);
+        std::string code, description, technology;
 
-        // 4. Inicia a View
-        ui::showSpecifyVaccineTypeView(controller);
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
-    } catch (const std::exception& e) {
-        std::cerr << "\nERRO CRÍTICO no sistema: " << e.what() << std::endl;
-        return 1;
+        std::cout << "Insira o código do tipo de vacina: ";
+        std::getline(std::cin, code);
+
+        std::cout << "Insira a descrição: ";
+        std::getline(std::cin, description);
+
+        std::cout << "Insira a tecnologia (ex: mRNA, Inactivated): ";
+        std::getline(std::cin, technology);
+
+        try {
+            //controller.vaccineTecnology(code, description, technology); # o pq do erro
+
+            std::cout << "\n[SUCESSO] Tipo de vacina '" << description << "' registado com sucesso!" << std::endl;
+
+        } catch (const std::exception& e) {
+            std::cerr << "\n[ERRO] Nao foi possivel registar: " << e.what() << std::endl;
+        }
+
+        std::cout << "\n---------------------------------------------" << std::endl;
     }
 
-    std::cout << "\n\nPressione Enter para sair...";
-    std::cin.get();
+    domain::model::VaccineTechnology selectTechnologyFromList() {
 
-    return 0;
-}
+        std::cout << "\n--- Seleção de Tecnologia ---" << std::endl;
+        std::cout << "1. mRNA" << std::endl;
+        std::cout << "2. Inactivated Virus" << std::endl;
+        std::cout << "3. Vector" << std::endl;
+
+        int choice = 0;
+        std::cout << "Escolha uma tecnologia (1-3): ";
+        std::cin >> choice;
+
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+       /* switch (choice) {
+            case 1:
+                return domain::model::VaccineTechnology(1, "mRNA");
+            case 2:
+                return domain::model::VaccineTechnology(2, "Inactivated Virus");
+            case 3:
+                return domain::model::VaccineTechnology (3, "Vector");
+            default:
+                std::cerr << "Escolha inválida, a usar 'Desconhecida' por defeito." << std::endl;
+                return domain::model::VaccineTechnology (99, "Desconhecida");}*/
+
+    }
+
+} // fim do namespace ui

@@ -2,8 +2,10 @@
 #define SPECIFY_VACCINE_TYPE_VIEW_H
 
 
-#include "../../../Core/headers/domain/model/VaccineType.h"
-#include "../../../Core/headers/controllers/ui/SpecifyVaccineTypeController.h"
+#include "headers/controllers/ui/SpecifyVaccineTypeController.h"
+#include "headers/domain/model/VaccineType.h"
+#include "headers/domain/model/VaccineTechnology.h" # o pq deste erro tbm
+
 
 namespace application {
     class VaccineTypeService;

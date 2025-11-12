@@ -1,4 +1,4 @@
-#include "../../../headers/domain/model/VaccineTypeInMemoryContainer.h"
+#include "../../../headers/domain/container/VaccineTypeInMemoryContainer.h"
 #include <algorithm>
 
 namespace domain::container {
