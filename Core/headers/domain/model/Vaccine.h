@@ -1,26 +1,30 @@
-//create by João Vaz 1240908
 #ifndef VACCINE_H
 #define VACCINE_H
 
 #include <string>
 #include <memory>
-#include "VaccineTechnology.h" // Inclui o ficheiro do Passo 1
+#include "VaccineTechnology.h" // Este já está correto
 
-// Modelo de Domínio da Vacina
+// --- CORREÇÃO: Colocar a classe DENTRO do namespace ---
+namespace domain {
+    namespace model {
 
-class Vaccine {
-private:
-    std::string commercialName;
-    std::string brand;
+        class Vaccine {
+        private:
+            std::string name;
+            std::string brand;
+            VaccineTechnology technology; // O enum já está no mesmo namespace
 
-    std::shared_ptr<VaccineTechnology> technology;
+        public:
+            Vaccine(const std::string& name, const std::string& brand, VaccineTechnology tech)
+                : name(name), brand(brand), technology(tech) {}
 
-public:
-    Vaccine(const std::string& name, const std::string& brand, std::shared_ptr<VaccineTechnology> tech)
-        : commercialName(name), brand(brand), technology(tech) {}
+            std::string getName() const { return name; }
+            std::string getBrand() const { return brand; }
+            VaccineTechnology getTechnology() const { return technology; }
+        };
 
-    std::string getCommercialName() const { return commercialName; }
-    std::shared_ptr<VaccineTechnology> getTechnology() const { return technology; }
-};
+    } // namespace model
+} // namespace domain
 
-#endif // VACCINE_H
+#endif //VACCINE_H

@@ -1,18 +1,18 @@
-# CMakeLists.txt (Raiz)
 cmake_minimum_required(VERSION 3.20)
 project(project-template)
 set(CMAKE_CXX_STANDARD 17)
 
-# MANTENHA estas linhas:
+# Mantém as tuas configurações de output
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
 
+# Adiciona o executável principal (main.cpp)
 add_executable(project-template main.cpp)
 
+# Adiciona os subdiretórios (Core e ConsoleApp são agora bibliotecas)
 add_subdirectory(Core)
 add_subdirectory(CoreTests)
 add_subdirectory(ConsoleApp)
 
-target_link_libraries(project-template Core)
-# REMOVA AQUI A LINHA target_link_directories(ConsoleApp PRIVATE "${CMAKE_BINARY_DIR}/lib")
-target_link_libraries(ConsoleApp Core)
+# MUDANÇA CRÍTICA: Liga o teu executável principal a AMBAS as bibliotecas
+target_link_libraries(project-template Core ConsoleApp)

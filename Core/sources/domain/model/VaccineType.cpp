@@ -3,19 +3,20 @@
 
 namespace domain::model {
 
-    // Construtor
+    // --- CORREÇÃO: Assinatura do construtor agora bate com o .h ---
     VaccineType::VaccineType(const std::string& code,
                              const std::string& disease,
                              const std::string& description,
                              VaccineTechnology technology)
         : code_(code), disease_(disease), description_(description), technology_(technology)
     {
-
+        // Validação (já estava correta)
         if (code_.empty() || disease_.empty() || description_.empty()) {
             throw std::invalid_argument("Code, Disease, and Description cannot be empty.");
         }
     }
 
+    // --- CORREÇÃO: Getters agora correspondem ao .h ---
     std::string VaccineType::getCode() const {
         return code_;
     }
