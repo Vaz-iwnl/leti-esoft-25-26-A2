@@ -1,4 +1,3 @@
-project(CoreTests)
 add_subdirectory(lib)
 
 add_executable(CoreTests domain/shared/StringUtilsTests.cpp)

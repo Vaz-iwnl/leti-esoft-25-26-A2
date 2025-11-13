@@ -1,43 +1,36 @@
+//
+// Created by jvaz on 13/10/2023.
+//
+
 #ifndef VACCINE_TYPE_H
 #define VACCINE_TYPE_H
 
-#include <string>
+#include <string> // <-- HEADER EM FALTA
+#include "VaccineTechnology.h"
 
-namespace domain::model {
+namespace domain {
+    namespace model {
 
-    // A lista predefinida de tecnologias de vacinas (AC11-1)
-    enum class VaccineTechnology {
-        Inactivated,      // Inativada (ou Morta)
-        LiveAttenuated,   // Atenuada Viva
-        Subunit,          // Subunidade
-        Toxoid,           // Toxoide
-        ViralVector,      // Vetor Viral
-        mRNA,              // mRNA
-        Unknown,
-        // Use uma função auxiliar para converter a string de entrada para este enum
-    };
+        class VaccineType {
+        private:
+            // --- CORREÇÃO: Adicionadas as variáveis de membro ---
+            std::string code_;
+            std::string description_;
+            std::string disease_; // <-- Esta variável também estava em falta
+            VaccineTechnology technology_;
 
-    class VaccineType {
-    public:
-        // Construtor
-        VaccineType(const std::string& code,
-                    const std::string& disease,
-                    const std::string& description,
-                    VaccineTechnology technology);
+        public:
+            // --- CORREÇÃO: Assinatura correta (com std:: e 3 strings) ---
+            VaccineType(const std::string& code, const std::string& disease, const std::string& description, VaccineTechnology technology);
 
-        // Métodos Getters (Acessores)
-        [[nodiscard]] std::string getCode() const;
-        [[nodiscard]] std::string getDisease() const;
-        [[nodiscard]] std::string getDescription() const;
-        [[nodiscard]] VaccineTechnology getTechnology() const;
+            // --- CORREÇÃO: std::string ---
+            std::string getCode() const;
+            std::string getDescription() const;
+            std::string getDisease() const; // <-- Este getter estava em falta
+            VaccineTechnology getTechnology() const;
+        };
 
+    } // namespace model
+} // namespace domain
 
-    private:
-        std::string code_;
-        std::string disease_;
-        std::string description_;
-        VaccineTechnology technology_;
-    };
-}
-
-#endif // VACCINE_TYPE_H
+#endif //VACCINE_TYPE_H

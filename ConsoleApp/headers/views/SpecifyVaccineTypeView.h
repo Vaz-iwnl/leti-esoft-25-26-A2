@@ -2,9 +2,9 @@
 #define SPECIFY_VACCINE_TYPE_VIEW_H
 
 
-#include "headers/controllers/ui/SpecifyVaccineTypeController.h"
-#include "headers/domain/model/VaccineType.h"
-#include "headers/domain/model/VaccineTechnology.h" # o pq deste erro tbm
+#include "controllers/ui/SpecifyVaccineTypeController.h"
+#include "domain/model/VaccineType.h"
+#include "domain/model/VaccineTechnology.h"
 
 
 namespace application {

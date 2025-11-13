@@ -1,31 +1,31 @@
-//create by João Vaz 1240908
-#ifndef VACCINE_TECHNOLOGY_REPOSITORY_H
-#define VACCINE_TECHNOLOGY_REPOSITORY_H
+//
+// Created by jvaz on 15/10/2023.
+//
+
+#ifndef VACCINETECHNOLOGYREPOSITORY_H
+#define VACCINETECHNOLOGYREPOSITORY_H
 
 #include <vector>
-#include <memory>
-#include "../model/VaccineTechnology.h"
+#include <string>
+#include "../model/VaccineTechnology.h" // <-- Este include já traz a definição correta
 
-//Repositório com a lista predefinida da Pfizer.
+namespace domain {
+    namespace repositories {
 
-class VaccineTechnologyRepository {
-private:
-    std::vector<std::shared_ptr<VaccineTechnology>> technologies;
+        class VaccineTechnologyRepository {
+        public:
+            virtual ~VaccineTechnologyRepository() = default;
 
-public:
-    VaccineTechnologyRepository() {
-        // --- A LISTA DO AC11-1 (do site da Pfizer) ---
-        technologies.push_back(std::make_shared<VaccineTechnology>(1, "Vacinas vivas atenuadas"));
-        technologies.push_back(std::make_shared<VaccineTechnology>(2, "Vacinas inativadas"));
-        technologies.push_back(std::make_shared<VaccineTechnology>(3, "Vacinas de mRNA (ARN mensageiro)"));
-        technologies.push_back(std::make_shared<VaccineTechnology>(4, "Vacinas de subunidades, recombinantes..."));
-        technologies.push_back(std::make_shared<VaccineTechnology>(5, "Vacinas de toxoide"));
-        technologies.push_back(std::make_shared<VaccineTechnology>(6, "Vacinas de vetor viral"));
-    }
+            /* --- CORREÇÃO ---
+             * A definição duplicada do 'enum class' foi removida daqui.
+             * O include na linha 11 já define o 'enum' que precisamos.
+             */
 
-    std::vector<std::shared_ptr<VaccineTechnology>> getAllTechnologies() const {
-        return technologies;
-    }
-};
+            // O metodo getAll() deve usar o tipo que foi importado
+            virtual std::vector<model::VaccineTechnology> getAll() const = 0;
+        };
 
-#endif // VACCINE_TECHNOLOGY_REPOSITORY_H
+    } // namespace repositories
+} // namespace domain
+
+#endif //VACCINETECHNOLOGYREPOSITORY_H

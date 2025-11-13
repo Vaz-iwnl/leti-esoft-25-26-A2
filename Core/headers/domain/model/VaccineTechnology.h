@@ -2,22 +2,22 @@
 #ifndef VACCINE_TECHNOLOGY_H
 #define VACCINE_TECHNOLOGY_H
 
-#include <string>
+// Definido dentro dos namespaces corretos
+namespace domain {
+    namespace model {
 
-/**
- * PASSO 1: Modelo de Domínio para a Tecnologia
- */
-class VaccineTechnology {
-private:
-    int id;
-    std::string name;
+        // A sua lista correta de enum
+        enum class VaccineTechnology {
+            Inactivated,      // Inativada (ou Morta)
+            LiveAttenuated,   // Atenuada Viva
+            Subunit,          // Subunidade
+            Toxoid,           // Toxoide
+            ViralVector,      // Vetor Viral
+            mRNA,             // mRNA
+            Unknown           // Para casos default
+        };
 
-public:
-    VaccineTechnology(int id, const std::string& name)
-        : id(id), name(name) {}
-
-    int getId() const { return id; }
-    std::string getName() const { return name; }
-};
+    } // namespace model
+} // namespace domain
 
 #endif // VACCINE_TECHNOLOGY_H
