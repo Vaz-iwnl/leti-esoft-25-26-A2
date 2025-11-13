@@ -1,16 +1,16 @@
 #include <stdexcept>
-#include "headers/domain/shared/Result.h"
+#include "domain/shared/Result.h"
 
-Result::Result(const int result, const wstring &message) {
+Result::Result(const int result, const std::wstring &message) {
     this->result = result;
     this->resultMsg = message;
 }
 
-const int Result::getResult() const {
+int Result::getResult() const {
     return this->result;
 }
 
-const wstring Result::getMessage() const {
+const std::wstring& Result::getMessage() const { // Alterado para retornar por referência constante
     return this->resultMsg;
 }
 
@@ -27,20 +27,20 @@ bool Result::isNOK() const {
     return !this->isOK();
 }
 
-const Result Result::OK() {
+Result Result::OK() { // Removido 'const'
     return Result(0,L"");
 }
 
-const Result Result::OK(const wstring &message) {
+Result Result::OK(const std::wstring &message) { // Removido 'const'
     return Result(0,message);
 }
 
-const Result Result::NOK(const wstring &message) {
+Result Result::NOK(const std::wstring &message) { // Removido 'const'
     return Result(-1,message);
 }
 
-const Result Result::NOK(int number, const wstring &message) {
+Result Result::NOK(int number, const std::wstring &message) { // Removido 'const'
     if (number != 0)
         return Result(number, message);
-    throw invalid_argument("A NOK result cannot have a 'zero' error number.");
+    throw std::invalid_argument("A NOK result cannot have a 'zero' error number.");
 }
