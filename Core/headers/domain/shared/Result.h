@@ -2,26 +2,27 @@
 #define RESULT_H
 
 #include <string>
-
-using namespace std;
+// using namespace std; REMOVIDO para evitar poluição do namespace global
 
 class Result {
 private:
     int result;
-    wstring resultMsg;
+    std::wstring resultMsg; // std:: adicionado
 
-    Result(const int result, const wstring &message);
+    Result(const int result, const std::wstring &message);
 
 public:
-    const int getResult() const;
-    const wstring getMessage() const;
+    int getResult() const; // Removido 'const' do tipo de retorno (redundante para tipos primitivos)
+    const std::wstring& getMessage() const; // Retorno por referência constante para eficiência
     bool isOK() const;
     bool isNOK() const;
     bool operator == (const Result& other) const;
-    static const Result OK();
-    static const Result OK(const wstring &message);
-    static const Result NOK(const wstring &message);
-    static const Result NOK(int number,const wstring &message);
+
+    // Removido 'const' do tipo de retorno para permitir otimizações de move/copy
+    static Result OK();
+    static Result OK(const std::wstring &message);
+    static Result NOK(const std::wstring &message);
+    static Result NOK(int number, const std::wstring &message);
 };
 
 #endif //RESULT_H

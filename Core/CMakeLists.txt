@@ -1,3 +1,10 @@
 project(Core)
 
-add_library(Core headers/domain/shared/Result.h headers/domain/shared/StringUtils.h sources/domain/shared/Result.cpp sources/domain/shared/StringUtils.cpp)
+# O tipo STATIC é importante para criar o ficheiro libCore.a
+add_library(Core STATIC
+        sources/domain/shared/Result.cpp
+        sources/domain/shared/StringUtils.cpp
+)
+
+# Crucial para que ConsoleApp possa compilar os headers
+target_include_directories(Core PUBLIC headers)
