@@ -1,4 +1,4 @@
-#include "headers/domain/shared/StringUtils.h"
+#include "domain/shared/StringUtils.h"
 #include "gtest/gtest.h"
 #include <string>
 
@@ -8,7 +8,7 @@
 TEST(StringUtilsTests, CheckingUpperCase) {
     std::wstring expected = L"ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     std::wstring original = L"abcdefghijklmnopqrstuvwxyz";
-    // Chamada direta para o método estático
+    // Chamada direta para o metodo estático
     std::wstring result = StringUtils::toUpperCase(original);
 
     EXPECT_EQ(result, expected);
@@ -17,7 +17,7 @@ TEST(StringUtilsTests, CheckingUpperCase) {
 TEST(StringUtilsTests, CheckingLowerCase) {
     std::wstring expected = L"abcdefghijklmnopqrstuvwxyz";
     std::wstring original = L"ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    // Chamada direta para o método estático
+    // Chamada direta para o metodo estático
     std::wstring result = StringUtils::toLowerCase(original);
 
     EXPECT_EQ(result, expected);
