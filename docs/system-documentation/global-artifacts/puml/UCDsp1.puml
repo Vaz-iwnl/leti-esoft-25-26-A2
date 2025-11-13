@@ -1,0 +1,80 @@
+@startuml
+'https://plantuml.com/use-case-diagram
+title Use Case Diagram - PVMS (Sprint 1)
+left to right direction
+
+' === ACTORS ===
+actor "SNS User" as User
+actor "Receptionist" as Rec
+actor "Nurse" as Nurse
+actor "DGS Administrator" as Admin
+actor "Core System Timer" as System  #grey
+
+' === USE CASES ===
+(UC01 - Register SNS User) as UC01
+(UC02 - Schedule Vaccination Appointment) as UC02
+(UC03 - View Vaccination Certificate) as UC03
+
+(UC04 - Register User's Arrival) as UC04
+(UC05 - Confirm Appointment) as UC05
+(UC06 - Issue Certificate On-site) as UC06
+
+(UC07 - View User Waiting List) as UC07
+(UC08 - Administer Vaccine) as UC08
+(UC09 - Record Adverse Reaction) as UC09
+
+(UC10 - Manage Vaccination Centers) as UC10
+(UC11 - Manage Receptionists and Nurses) as UC11
+(UC12 - Manage Vaccine Types) as UC12
+(UC13 - Configure Current Outbreak) as UC13
+
+(UC14 - System Alert: Observation Period Ended) as UC14
+
+' === RELATIONSHIPS ===
+
+' SNS User
+User --> UC01
+User --> UC02
+User --> UC03
+
+' Receptionist
+Rec --> UC04
+Rec --> UC05
+
+' Nurse
+Nurse --> UC06
+Nurse --> UC07
+Nurse --> UC08
+Nurse --> UC09
+
+' Administrator
+Admin --> UC10
+Admin --> UC11
+Admin --> UC12
+Admin --> UC13
+
+' System (timer/events)
+System --> UC14
+
+' === INCLUDES / EXTENDS ===
+
+' <<include>> removida - A verificação de capacidade é interna ao UC02
+' <<extend>> removida - UC06 é um UC independente iniciado pela Enfermeira "a pedido"
+
+' === NOTES ===
+note top of User
+Citizen registered in SNS
+who schedules and receives vaccines
+end note
+
+note bottom of Admin
+Manages centers, vaccines, staff
+and produces reports
+end note
+
+note bottom of System
+Internal event scheduler
+responsible for notifications or automatic checks
+end note
+
+@enduml
