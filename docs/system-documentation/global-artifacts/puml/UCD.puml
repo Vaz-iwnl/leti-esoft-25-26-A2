@@ -1,6 +1,6 @@
 @startuml
 'https://plantuml.com/use-case-diagram
-title Use Case Diagram - PMS (Sprint 2)
+title Use Case Diagram - PVMS (Sprint 1)
 left to right direction
 
 ' === ACTORS ===
@@ -29,10 +29,6 @@ actor "Core System Timer" as System  #grey
 (UC13 - Configure Current Outbreak) as UC13
 
 (UC14 - System Alert: Observation Period Ended) as UC14
-' === NEW UC'S SPRINT 2 ===
-(UC15 - Register a Vaccine ) as UC15
-(UC16 - Register Employee ) as UC16
-(UC17 - Get List of Employees by Role ) as UC17
 
 ' === RELATIONSHIPS ===
 
@@ -56,11 +52,12 @@ Admin --> UC10
 Admin --> UC11
 Admin --> UC12
 Admin --> UC13
-Admin --> UC15
-Admin --> UC16
-Admin --> UC17
+
 ' System (timer/events)
 System --> UC14
+
+' === INCLUDES / EXTENDS ===
+UC08 ..> UC09 : <<extend>> "If reaction observed"
 
 ' === NOTES ===
 note top of User

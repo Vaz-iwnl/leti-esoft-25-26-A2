@@ -1,36 +1,12 @@
 #include <iostream>
-#include <memory>
-#include "ConsoleApp/headers/views/SpecifyVaccineTypeView.h"
-#include "Core/headers/domain/container/VaccineTypeInMemoryContainer.h"
-#include "Core/headers/domain/model/VaccineTypeService.h"
-#include "Core/headers/controllers/ui/SpecifyVaccineTypeController.h"
+
+using namespace std;
 
 int main() {
-    std::cout << "==================================================" << std::endl;
-    std::cout << "  Sistema de Gestão de Vacinação Pandémica (PVMS)" << std::endl;
-    std::cout << "  DGS - Direção Geral de Saúde" << std::endl;
-    std::cout << "==================================================" << std::endl;
+    std::locale::global(std::locale(""));  // (*)
+    std::wcout.imbue(std::locale());
 
-    try {
-        // 1. Instancia o Container (Repositório em Memória)
-        auto container = std::make_unique<domain::container::VaccineTypeInMemoryContainer>();
-
-        // 2. Instancia o Service, injetando o Container
-        auto service = std::make_unique<application::VaccineTypeService>(std::move(container));
-
-        // 3. Instancia o Controller, injetando o Service
-        Core::Controller::SpecifyVaccineTypeController controller(*service);
-
-        // 4. Inicia a View
-        ui::showSpecifyVaccineTypeView(controller);
-
-    } catch (const std::exception& e) {
-        std::cerr << "\nERRO CRÍTICO no sistema: " << e.what() << std::endl;
-        return 1;
-    }
-
-    std::cout << "\n\nPressione Enter para sair...";
-    std::cin.get();
+    std::wcout << L"Hello, World!" << std::endl;
 
     return 0;
 }
