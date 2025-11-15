@@ -1,0 +1,20 @@
+@startuml
+' File: US11-SSD.puml
+autonumber
+actor ":Administrator" as ADM
+
+participant ":System" as SYS
+
+activate ADM
+ADM -> SYS: initiates register vaccine
+activate SYS
+SYS --> ADM: requests data (code, name, manufacturer) and\nshows lists of vaccine types and technologies
+deactivate SYS
+
+ADM -> SYS: enters data and selects type and technology
+activate SYS
+SYS --> ADM: informs operation (in)success
+deactivate SYS
+
+deactivate ADM
+@enduml

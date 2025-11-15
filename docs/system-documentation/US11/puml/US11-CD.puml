@@ -1,0 +1,71 @@
+@startuml
+' Ficheiro: US11-CD.puml
+skinparam classAttributeIconSize 0
+
+' UI Layer
+class RegisterVaccineUI {
+  + show()
+  - doShow()
+}
+
+' Controller Layer
+class RegisterVaccineController {
+  + RegisterVaccineController()
+  + getVaccineTypes()
+  + getVaccineTechnologies()
+  + registerVaccine(data)
+}
+
+' Application/Service Layer
+class VaccineService {
+  + VaccineService()
+  + registerVaccine(data)
+}
+
+class VaccineTypeService {
+  + VaccineTypeService()
+  + getVaccineTypes()
+}
+
+' Repository/Container Layer
+class VaccineContainer {
+  + create(...)
+  + save(vaccine)
+}
+
+interface VaccineTechnologyRepository {
+  + getAll()
+}
+
+' Domain Layer
+class Vaccine {
+  + Vaccine(code, name, manuf, type, tech)
+}
+
+class VaccineType {
+}
+
+class VaccineTechnology {
+}
+
+' Exception
+class DuplicateCodeException << (E,red) >> {
+}
+
+
+' Relações
+RegisterVaccineUI ..> RegisterVaccineController
+RegisterVaccineController ..> VaccineService
+RegisterVaccineController ..> VaccineTypeService
+RegisterVaccineController ..> VaccineTechnologyRepository
+
+VaccineService ..> VaccineContainer
+VaccineTypeService ..> VaccineTypeContainer
+
+VaccineContainer "1" o-- "*" Vaccine
+VaccineContainer ..> DuplicateCodeException : <<throws>>
+VaccineTypeContainer "1" o-- "*" VaccineType
+
+VaccineTechnologyRepository ..> VaccineTechnology
+
+@enduml

@@ -1,0 +1,71 @@
+@startuml
+' File: US11-SD.puml
+autonumber
+skinparam groupInheritance 2
+
+actor ":Administrator" as ADM
+
+participant ":RegisterVaccineUI" as UI
+participant ":RegisterVaccineController" as CTRL
+participant ":VaccineTypeService" as VT_SRV
+participant ":VaccineTechnologyRepository" as VTECH_REPO
+participant ":VaccineService" as VAC_SRV
+participant ":VaccineContainer" as VAC_CONT
+participant "vac:Vaccine" as VAC
+
+activate ADM
+ADM -> UI: initiates register vaccine
+activate UI
+
+UI -> CTRL: getVaccineTypes()
+activate CTRL
+CTRL -> VT_SRV: getVaccineTypes()
+activate VT_SRV
+VT_SRV --> CTRL: vaccineTypesList
+deactivate VT_SRV
+CTRL --> UI: vaccineTypesList
+deactivate CTRL
+
+UI -> CTRL: getVaccineTechnologies()
+activate CTRL
+CTRL -> VTECH_REPO: getAll()
+activate VTECH_REPO
+VTECH_REPO --> CTRL: vaccineTechnologiesList
+deactivate VTECH_REPO
+CTRL --> UI: vaccineTechnologiesList
+deactivate CTRL
+
+UI --> ADM: requests data (code, name, manufacturer) and shows lists of types and technologies
+
+ADM -> UI: enters data and selects type and technology
+UI -> CTRL: registerVaccine(data)
+activate CTRL
+
+CTRL -> VAC_SRV: registerVaccine(data)
+activate VAC_SRV
+
+VAC_SRV -> VAC_CONT: create(code, name, manuf, type, tech)
+activate VAC_CONT
+
+create VAC
+VAC_CONT -> VAC: Vaccine(code, name, manuf, type, tech)
+activate VAC
+VAC --> VAC_CONT: vac
+deactivate VAC
+
+VAC_CONT -> VAC_CONT: save(vac)
+note right: checks for duplicates (DuplicateCodeException)
+VAC_CONT --> VAC_SRV: result (success)
+deactivate VAC_CONT
+
+VAC_SRV --> CTRL: result (success)
+deactivate VAC_SRV
+
+CTRL --> UI: operation success
+deactivate CTRL
+
+UI --> ADM: informs operation success
+deactivate UI
+deactivate ADM
+
+@enduml

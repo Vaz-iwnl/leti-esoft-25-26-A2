@@ -1,0 +1,23 @@
+@startuml
+' File: US11-DM.puml
+skinparam classAttributeIconSize 0
+
+class Vaccine {
+  - code
+  - name
+  - manufacturer
+}
+
+class VaccineType {
+  - code
+  - description
+}
+
+class VaccineTechnology {
+  - description
+}
+
+Vaccine "1" -- "1" VaccineType : has
+Vaccine "1" -- "1" VaccineTechnology : uses
+
+@enduml
